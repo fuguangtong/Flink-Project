@@ -11,6 +11,7 @@ object WordCount {
     val dataset=env.readTextFile(input)
     import org.apache.flink.api.scala._
     val aggDs = dataset.flatMap(_.split(" ")).map((_,1)).groupBy(0).sum(1)
-    aggDs.print()
+    aggDs.writeAsCsv("/opt/module/flink/applog/b.txt")
+    env.execute("batch")
   }
 }
